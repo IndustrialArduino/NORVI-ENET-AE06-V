@@ -18,5 +18,5 @@ Digital Inputs
 Analog Inputs with 0-10V
 DIN-Rail mount
 
-Datasheet:    https://drive.google.com/open?id=1Y5cCFklDTyVm9p-51ZI4_CUZGn-4bJ8H&usp=drive_fs
-User Guide:   https://drive.google.com/open?id=1eNpEvwEF_E1hBhY3lqTlt3_AdjibJa0Q&usp=drive_fs
+Datasheet:    https://norvi.lk/docs/norvi-enet-ar06-v-datasheet/
+User Guide:   https://norvi.lk/docs/norvi-enet-ae06-v-user-guide/
