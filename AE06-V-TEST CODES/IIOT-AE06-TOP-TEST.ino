@@ -27,7 +27,6 @@
 #include "FS.h"
 #include "SD.h"
 #include "RTClib.h"
-#include <Adafruit_ADS1X15.h>
 
 #define ANALOG_PIN_0 36
 
@@ -60,8 +59,9 @@
 #define OLED_RESET     -1 // Reset pin # (or -1 if sharing Arduino reset pin)
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
-Adafruit_ADS1115 ads;
-//SPIClass spi = SPIClass(VSPI);
+
+
+
 
 RTC_DS3231 rtc; 
 char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
@@ -134,23 +134,10 @@ void setup() {
     Serial.println(F("SSD1306 allocation failed"));
     for(;;); // Don't proceed, loop forever
   }
-
-    delay(100);
   display.display();
 
-  //while(1);
-
-  if (!ads.begin(0x48)) {
-    Serial.println("Failed to initialize ADS.");
-    while (1);
-  }
-
-
-
-  //RTC_Check();
+  RTC_Check();
   delay(1000);
-
-
   SD_CHECK();
   delay(1000);
   
@@ -171,15 +158,10 @@ void setup() {
 
 
 
+
+
+
 void loop() {
-
-  int16_t adc0, adc1, adc2, adc3;
-  float volts0, volts1, volts2, volts3;
-
-  adc0 = ads.readADC_SingleEnded(0);
-  adc1 = ads.readADC_SingleEnded(1);
-  adc2 = ads.readADC_SingleEnded(2);
-  adc3 = ads.readADC_SingleEnded(3);
  
  
   Serial.print(digitalRead(INPUT1));Serial.print(digitalRead(INPUT2));Serial.print(digitalRead(INPUT3));Serial.println(digitalRead(INPUT4));
@@ -190,12 +172,32 @@ void loop() {
   Serial.print("Push button  ");Serial.println(readSwitch());
   Serial.println(""); 
 
-  Serial.print("AIN0: "); Serial.print(adc0); Serial.print("  "); Serial.print(volts0); Serial.println("V");
-  Serial.print("AIN1: "); Serial.print(adc1); Serial.print("  "); Serial.print(volts1); Serial.println("V");
-  Serial.print("AIN2: "); Serial.print(adc2); Serial.print("  "); Serial.print(volts2); Serial.println("V");
-  Serial.print("AIN3: "); Serial.print(adc3); Serial.print("  "); Serial.print(volts3); Serial.println("V");
-
-
+  
+  digitalWrite(OUTPUT1, HIGH);
+  digitalWrite(OUTPUT2, LOW);
+  digitalWrite(OUTPUT3, LOW);
+  digitalWrite(OUTPUT4, LOW);
+  delay(500);
+  digitalWrite(OUTPUT1, LOW);
+  digitalWrite(OUTPUT2, HIGH);
+  digitalWrite(OUTPUT3, LOW);
+  digitalWrite(OUTPUT4, LOW);
+  delay(500);
+  digitalWrite(OUTPUT1, LOW);
+  digitalWrite(OUTPUT2, LOW);
+  digitalWrite(OUTPUT3, HIGH);
+  digitalWrite(OUTPUT4, LOW);
+  delay(500);
+  digitalWrite(OUTPUT1, LOW);
+  digitalWrite(OUTPUT2, LOW);
+  digitalWrite(OUTPUT3, LOW);
+  digitalWrite(OUTPUT4, HIGH);
+  delay(500);
+  digitalWrite(OUTPUT1, LOW);
+  digitalWrite(OUTPUT2, LOW);
+  digitalWrite(OUTPUT3, LOW);
+  digitalWrite(OUTPUT4, LOW);
+  delay(500);
   
   
   //Serial1.println("Hello RS-485");
@@ -254,8 +256,7 @@ void RTC_Check(){
 
 void SD_CHECK(){
   uint8_t cardType = SD.cardType();
-  //spi.begin(SCK, MISO, MOSI, CS);
-
+  
     if(SD.begin(5))
  {
   Serial.println("Card Mount: success");
