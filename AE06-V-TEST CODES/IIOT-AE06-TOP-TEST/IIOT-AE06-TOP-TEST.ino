@@ -1,6 +1,5 @@
 /*
  * RTC Check
- * micro SD Card Check 
  * Ethernet Check      
  * All Output Turn ON Series
  * All input status serial print
@@ -123,7 +122,8 @@ void loop() {
   adc1 = ads.readADC_SingleEnded(1);
   adc2 = ads.readADC_SingleEnded(2);
   adc3 = ads.readADC_SingleEnded(3);
- 
+  
+  Serial.println("\n"); 
   Serial.print(digitalRead(INPUT1));
   Serial.print(digitalRead(INPUT2));
   Serial.print(digitalRead(INPUT3));
@@ -139,10 +139,10 @@ void loop() {
   Serial.println(readSwitch());
   Serial.println(""); 
 
-  Serial.print("AIN0: "); Serial.print(adc0); Serial.print("  "); Serial.print(volts0); Serial.println("V");
-  Serial.print("AIN1: "); Serial.print(adc1); Serial.print("  "); Serial.print(volts1); Serial.println("V");
-  Serial.print("AIN2: "); Serial.print(adc2); Serial.print("  "); Serial.print(volts2); Serial.println("V");
-  Serial.print("AIN3: "); Serial.print(adc3); Serial.print("  "); Serial.print(volts3); Serial.println("V");
+  Serial.print(" AIN0: "); Serial.print(adc0); 
+  Serial.print("\n AIN1: "); Serial.print(adc1); 
+  Serial.print("\n AIN2: "); Serial.print(adc2); 
+  Serial.print("\n AIN3: "); Serial.print(adc3); 
 
   delay(1000);
 }
